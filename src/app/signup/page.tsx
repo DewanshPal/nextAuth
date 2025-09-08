@@ -41,40 +41,85 @@ export default function SignupPage() {
         }
     },[user]);
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-        <h1>{loading ? "Processing" : "Signup"}</h1>
-        <hr />
-        <label htmlFor="username">username</label>
-        <input 
-        className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
+     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4">
+      <div className="bg-white shadow-xl rounded-2xl w-full max-w-md p-8">
+        {/* Header */}
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-2">
+          {loading ? "Processing..." : "Create an Account"}
+        </h1>
+        <p className="text-center text-gray-500 mb-6">
+          Join us today and get started
+        </p>
+
+        {/* Form */}
+        <div className="flex flex-col">
+          <label
+            htmlFor="username"
+            className="text-sm font-medium text-gray-700 mb-1"
+          >
+            Username
+          </label>
+          <input
             id="username"
             type="text"
             value={user.username}
-            onChange={(e) => setUser({...user, username: e.target.value})}
-            placeholder="username"
-            />
-        <label htmlFor="email">email</label>
-        <input 
-        className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
+            onChange={(e) => setUser({ ...user, username: e.target.value })}
+            placeholder="Enter your username"
+            className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+          />
+
+          <label
+            htmlFor="email"
+            className="text-sm font-medium text-gray-700 mb-1"
+          >
+            Email
+          </label>
+          <input
             id="email"
-            type="text"
+            type="email"
             value={user.email}
-            onChange={(e) => setUser({...user, email: e.target.value})}
-            placeholder="email"
-            />
-        <label htmlFor="password">password</label>
-        <input 
-        className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
+            onChange={(e) => setUser({ ...user, email: e.target.value })}
+            placeholder="Enter your email"
+            className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+          />
+
+          <label
+            htmlFor="password"
+            className="text-sm font-medium text-gray-700 mb-1"
+          >
+            Password
+          </label>
+          <input
             id="password"
             type="password"
             value={user.password}
-            onChange={(e) => setUser({...user, password: e.target.value})}
-            placeholder="password"
-            />
-            <button
+            onChange={(e) => setUser({ ...user, password: e.target.value })}
+            placeholder="Enter your password"
+            className="w-full p-3 border border-gray-300 rounded-lg mb-6 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+          />
+
+          {/* Button */}
+          <button
             onClick={onSignup}
-            className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600">{buttonDisabled ? "No signup" : "Signup"}</button>
-            <Link href="/login">Visit login page</Link>
+            className={`w-full py-3 rounded-lg font-semibold text-white transition-colors ${
+              buttonDisabled
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700"
+            }`}
+            disabled={buttonDisabled}
+          >
+            {buttonDisabled ? "Please fill all fields" : "Sign Up"}
+          </button>
         </div>
+
+        {/* Footer */}
+        <p className="text-center text-gray-600 mt-6 text-sm">
+          Already have an account?{" "}
+          <Link href="/login" className="text-indigo-600 hover:underline font-medium">
+            Login here
+          </Link>
+        </p>
+      </div>
+    </div>
   )
 }

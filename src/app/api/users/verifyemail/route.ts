@@ -12,12 +12,13 @@ export async function POST(request: NextRequest){
 
         //find the user with the token
         const user = await User.findOne({verifyToken: token, verifyTokenExpiry: {$gt: Date.now()}}) // greater than current time
+        console.log(user);
 
         if(!user){
             return NextResponse.json({error: "Invalid or expired token"}, {status: 400})
         }
 
-        user.isVerified = true;
+        user.isVerfied = true;
         user.verifyToken = undefined;
         user.verifyTokenExpiry = undefined;
         await user.save();

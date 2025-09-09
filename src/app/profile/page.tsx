@@ -93,6 +93,7 @@ export default function ProfilePage() {
           >
             View Public Profile
           </Link>
+          <p className="text-gray-600">To get Verified check your Gmail</p>
         </div>
       </div>
     </div>

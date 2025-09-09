@@ -21,8 +21,9 @@ export async function GET(request: NextRequest){
             data: user
         })
 
-    } catch (error: any) {
-        return NextResponse.json({error: error.message}, {status: 500})
+    } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : 'Failed to get user data';
+        return NextResponse.json({error: errorMessage}, {status: 500})
 
     }
 }

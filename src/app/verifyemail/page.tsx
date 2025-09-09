@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState, useCallback} from "react";
 
 
 export default function VerifyEmailPage() {
@@ -11,18 +11,18 @@ export default function VerifyEmailPage() {
     const [verified, setVerified] = useState(false);
     const [error, setError] = useState(false);
 
-    const verifyUserEmail = async () => {
+    const verifyUserEmail = useCallback(async () => {
         try {
             await axios.post('/api/users/verifyemail', {token})
             setVerified(true);
             setError(false);
-        } catch (error:any) {
+        } catch (error: unknown) {
             setError(true);
-            console.log(error.reponse.data);
+            console.log(error);
             
         }
 
-    }
+    }, [token]);
 
     useEffect(() => {
         setError(false);
@@ -36,7 +36,7 @@ export default function VerifyEmailPage() {
         if(token.length > 0) {
             verifyUserEmail();
         }
-    }, [token]);
+    }, [token, verifyUserEmail]);
 
     return(
  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4">

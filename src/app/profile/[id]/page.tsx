@@ -1,4 +1,11 @@
-export default function UserProfile({ params }: any) {
+interface UserProfileProps {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
+export default async function UserProfile({ params }: UserProfileProps) {
+  const { id } = await params;
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 py-8 px-4">
       <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-6 text-center">
@@ -11,7 +18,7 @@ export default function UserProfile({ params }: any) {
         <div className="flex flex-col items-center">
           {/* Avatar with first letter of ID */}
           <div className="w-20 h-20 flex items-center justify-center bg-orange-500 text-white text-3xl font-bold rounded-full shadow-md">
-            {params.id.charAt(0).toUpperCase()}
+            {id.charAt(0).toUpperCase()}
           </div>
         </div>
       </div>

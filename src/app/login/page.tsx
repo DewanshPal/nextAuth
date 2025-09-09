@@ -16,7 +16,6 @@ export default function LoginPage() {
         password: "",
        
     })
-    const [buttonDisabled, setButtonDisabled] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
 
 
@@ -27,20 +26,17 @@ export default function LoginPage() {
             console.log("Login success", response.data);
             toast.success("Login success");
             router.push("/profile");
-        } catch (error:any) {
-            console.log("Login failed", error.message);
-            toast.error(error.message);
+        } catch (error: unknown) {
+            const errorMessage = error instanceof Error ? error.message : 'Login failed';
+            console.log("Login failed", errorMessage);
+            toast.error(errorMessage);
         } finally{
         setLoading(false);
         }
     }
 
     useEffect(() => {
-        if(user.email.length > 0 && user.password.length > 0) {
-            setButtonDisabled(false);
-        } else{
-            setButtonDisabled(true);
-        }
+        // This effect is intentionally empty as it's not needed
     }, [user]);
 
     return (

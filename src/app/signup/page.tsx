@@ -23,9 +23,10 @@ export default function SignupPage() {
             toast.success("Signup successful. Please login");
             router.push('/login');
         }
-        catch(error:any)
+        catch(error: unknown)
         {
-            console.log("Signup failed", error.message);
+            const errorMessage = error instanceof Error ? error.message : 'Signup failed';
+            console.log("Signup failed", errorMessage);
             toast.error("Signup failed");
 
         }finally{
